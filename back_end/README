@@ -1,0 +1,7 @@
+//Library Backend (todo: a fun name)
+
+Execution instructions:
+    node back_end/index.js
+    
+Example request:
+    curl -X PUT -H "Content-Type: application/json" -d '{"username":"jim", "password":"bob"}' localhost:8080/Login
