@@ -1,3 +1,4 @@
+var SessMan = require('../Utils/SessionManagement')
 
 var Login = (userToPass) => 
     (req, res) => {
@@ -5,15 +6,21 @@ var Login = (userToPass) =>
         
         var user = req.body.username;
         var pass = req.body.password;
+        
+        if(userToPass[user] != pass){
+            res.sendStatus(401)
+        }else{
+            console.log(userToPass);        
+            
+            SessMan.EstablishSession(req, res)
+            
+            res.send("Login successful\n");
+        }
     
-        console.log(userToPass);
-        userToPass[user] = pass
-    
-        res.send("login");
     }
 
 module.exports = {
     Login: (userMap) => Login(userMap)
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"username":"jim", "password":"bob"}' localhost:8080/Login
+// curl -X PUT -H "Content-Type: application/json" -d '{"username":"java", "password":"script"}' -b myJar -c myJar localhost:8080/Login
