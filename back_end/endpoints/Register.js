@@ -1,3 +1,5 @@
+var SessMan = require('../Utils/SessionManagement')
+
 var Register = (userToPass) => 
     (req, res) => {
         console.log("In Register");
@@ -6,10 +8,9 @@ var Register = (userToPass) =>
         var pass = req.body.password;
     
         //If no corresponding user:pass entry exists
-        if(userToPass[user] == null){
-            //TODO: Login, add session management stuff, etc
-            
+        if(userToPass[user] == null){            
             userToPass[user] = pass
+            SessMan.EstablishSession(req, res);
             res.send("Registered\n")
         }else{
             res.status(400);

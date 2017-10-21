@@ -6,6 +6,7 @@ var Login = (userToPass) =>
         
         var user = req.body.username;
         var pass = req.body.password;
+
         
         if(userToPass[user] != pass){
             res.sendStatus(401)
@@ -23,4 +24,4 @@ module.exports = {
     Login: (userMap) => Login(userMap)
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"username":"java", "password":"script"}' -b myJar -c myJar localhost:8080/Login
+// curl -X PUT -H "Content-Type: application/json" -d '{"username":"memes", "password":"tbh"}' -b myJar -c myJar localhost:8080/Login
