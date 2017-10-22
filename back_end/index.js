@@ -1,6 +1,7 @@
 /*eslint-env node*/
 var Login = require('./endpoints/Login')
 var AddToCart = require('./endpoints/AddToCart')
+var AddBookToLibrary = require('./endpoints/AddBookToLibrary')
 var Register = require('./endpoints/Register')
 var Logout = require('./endpoints/Logout')
 var express = require('express')
@@ -9,7 +10,7 @@ var bodyParser = require('body-parser')
 var SessionManagement = require('./Utils/SessionManagement')
 var session = require('express-session');
 var FileStore = require('session-file-store')(session)
-//session = new NodeSession({secret: 'Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD'});
+//session = new NodeSession({secret: ‘Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD'});
 
 var app = express()
 app.use(bodyParser.json())
@@ -24,7 +25,10 @@ app.use(session({
 }));
 
 var usersToPass = {}
-usersToPass["java"] = "script"
+
+app.post("/AddBookToLibrary", 
+    AddBookToLibrary.AddBookToLibrary
+)
 
 app.put('/Register', 
     Register.Register(usersToPass)
