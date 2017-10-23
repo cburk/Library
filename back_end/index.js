@@ -51,3 +51,8 @@ app.put('/Logout',
 app.listen(8080)
 console.log("Library backend listening on 8080")
 
+/*
+curl -X PUT -H "Content-Type: application/json" -d '{"username":"ian", "password":"curtis"}' -b mySessionStore.txt -c mySessionStore.txt localhost:8080/Register
+curl -X POST -H "Content-Type: application/json" -d '{"title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
+curl -X PUT -H "Content-Type: application/json" -d '{"id":<hash>}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddToCart
+*/

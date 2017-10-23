@@ -14,9 +14,6 @@ var Login = (userToPass) =>
             console.log(userToPass);        
             
             SessMan.EstablishSession(req, user)
-            console.log("Session: ", req.session)
-            console.log("Id: ", req.session.id)
-            
 
             res.send("Login successful\n");
         }

@@ -24,7 +24,7 @@ var AddBookToListOfAllBooks = (bookObj) => {
 	});
     }
 
-var GetAllBooksList = () => {
+var GetAllBooksList = (callbackFunc) => {
         console.log("In Get All books");
         MongoClient.connect(BASE_URI + "/Library", function(err, db) {
 		if(!err) {
@@ -34,10 +34,12 @@ var GetAllBooksList = () => {
 			AllBooksCollection.find().toArray((err, res) => {
 				if(err){ console.log("Query returned error: " + err ) }
 				console.log("Query res: ")
+				var results = []
 				res.forEach((el) => {
-					console.log("{id: " + el.id + "}")
+					//console.log("{id: " + el.id + "}")
+					results.push(el)
 				})
-				return res
+				callbackFunc(results)
 			})
 		}
 	});
