@@ -14,4 +14,4 @@ module.exports = {
     AddToCart: AddToCart
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"id":"1"}'  -b myJar -c myJar localhost:8080/AddToCart
+// curl -X PUT -H "Content-Type: application/json" -d '{"id":"1"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddToCart

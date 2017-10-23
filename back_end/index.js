@@ -27,6 +27,7 @@ app.use(session({
 var usersToPass = {}
 
 app.post("/AddBookToLibrary", 
+    SessionManagement.VerifyLoggedIn,
     AddBookToLibrary.AddBookToLibrary
 )
 

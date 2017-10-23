@@ -13,8 +13,11 @@ var Login = (userToPass) =>
         }else{
             console.log(userToPass);        
             
-            SessMan.EstablishSession(req, res)
+            SessMan.EstablishSession(req, user)
+            console.log("Session: ", req.session)
+            console.log("Id: ", req.session.id)
             
+
             res.send("Login successful\n");
         }
     
@@ -24,4 +27,4 @@ module.exports = {
     Login: (userMap) => Login(userMap)
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"username":"memes", "password":"tbh"}' -b myJar -c myJar localhost:8080/Login
+// curl -X PUT -H "Content-Type: application/json" -d '{"username":"memes", "password":"tbh"}' -b mySessionStore.txt -c mySessionStore.txt localhost:8080/Login

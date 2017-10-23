@@ -10,7 +10,7 @@ var Register = (userToPass) =>
         //If no corresponding user:pass entry exists
         if(userToPass[user] == null){            
             userToPass[user] = pass
-            SessMan.EstablishSession(req, res);
+            SessMan.EstablishSession(req, user);
             res.send("Registered\n")
         }else{
             res.status(400);
