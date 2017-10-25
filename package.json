@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/cburk/Library#readme",
   "dependencies": {
+    "config": "^1.27.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "md5": "^2.2.1",
     "mongodb": "^2.2.33",
+    "node-config-manager": "^1.2.0",
     "node-datetime": "^2.0.3",
     "session-file-store": "^1.1.2"
   }
