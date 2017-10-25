@@ -4,8 +4,11 @@ var AddToCart = require('./endpoints/AddToCart')
 var AddBookToLibrary = require('./endpoints/AddBookToLibrary')
 var Register = require('./endpoints/Register')
 var Logout = require('./endpoints/Logout')
+var GetBooks = require('./endpoints/GetAllBooks')
 var express = require('express')
 var bodyParser = require('body-parser')
+
+var DropCollections = require('./DataAccess/DropCollections')
 
 var SessionManagement = require('./Utils/SessionManagement')
 var session = require('express-session');
@@ -26,15 +29,19 @@ app.use(session({
 
 var usersToPass = {}
 
+/* TODO: Maybe use configs for endpoints instead, for consistency? */
+// POST Add to?  Semantically correct?
 app.post("/AddBookToLibrary", 
     SessionManagement.VerifyLoggedIn,
     AddBookToLibrary.AddBookToLibrary
 )
 
+//TODO: Is registration more of a post?
 app.put('/Register', 
     Register.Register(usersToPass)
 )
 
+// Semantics?
 app.put('/AddToCart',
     SessionManagement.VerifyLoggedIn,
     AddToCart.AddToCart
@@ -48,6 +55,15 @@ app.put('/Logout',
     Logout.Logout
 )
 
+app.get('/BookList',
+    GetBooks.GetAllBooksEndpoint
+)
+
+//TODO: Definitely needs to leave code for production
+app.put('/DropCollections',
+    DropCollections.DropAllCollections
+)
+
 app.listen(8080)
 console.log("Library backend listening on 8080")
 
@@ -55,4 +71,7 @@ console.log("Library backend listening on 8080")
 curl -X PUT -H "Content-Type: application/json" -d '{"username":"ian", "password":"curtis"}' -b mySessionStore.txt -c mySessionStore.txt localhost:8080/Register
 curl -X POST -H "Content-Type: application/json" -d '{"title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
 curl -X PUT -H "Content-Type: application/json" -d '{"id":<hash>}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddToCart
+curl -X GET localhost:8080/BookList
+
+curl -X PUT -H "Content-Type: application/json" localhost:8080/DropCollections
 */

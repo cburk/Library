@@ -1,28 +1,8 @@
-
+var cfgManager = require('config');
 var MongoClient = require('mongodb').MongoClient;
-var BASE_URI = "mongodb://localhost:27017"
-var ALL_BOOKS_COLLECTION = "AllBooks"
-
-//Working connection
-/*
-MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
-  if(!err) {
-    console.log("We are connected");
-  }
-});
-*/
-
-var AddBookToListOfAllBooks = (bookObj) => {
-        console.log("In DAL, adding book: " + bookObj);
-        MongoClient.connect(BASE_URI + "/Library", function(err, db) {
-		if(!err) {
-			console.log("We are connected");
-			
-			var AllBooksCollection = db.collection(ALL_BOOKS_COLLECTION);
-			AllBooksCollection.insert(bookObj)
-		}
-	});
-    }
+var BASE_URI = cfgManager.BASE_URI
+var ALL_BOOKS_COLLECTION = cfgManager.ALL_BOOKS_COLLECTION
+var DB_LOCATION = cfgManager.DB_LOCATION
 
 var GetAllBooksList = (callbackFunc) => {
         console.log("In Get All books");
@@ -43,9 +23,9 @@ var GetAllBooksList = (callbackFunc) => {
 			})
 		}
 	});
-    }
+}
 
 module.exports = {
-    AddBookToListOfAllBooks: AddBookToListOfAllBooks,
     GetAllBooksList: GetAllBooksList
 }
+

@@ -12,6 +12,8 @@
 ## Execution Instructions:
     Start the db: `sudo mongod`
     
+    cd to the back_end directory (configs won't be recognized otherwise)
+
     Run the server: `node back_end/index.js`
     
 ## Example Request Sequence:
