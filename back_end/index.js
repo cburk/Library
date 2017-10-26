@@ -9,7 +9,9 @@ var CheckInOut = require('./endpoints/CheckInOut')
 var express = require('express')
 var bodyParser = require('body-parser')
 
+// TODO: Remove for prod, 
 var DropCollections = require('./DataAccess/DropCollections')
+var UsersDAL = require('./DataAccess/Users')
 
 var SessionManagement = require('./Utils/SessionManagement')
 var session = require('express-session');
@@ -28,7 +30,8 @@ app.use(session({
   store: new FileStore()
 }));
 
-var usersToPass = {}
+
+Register.NextUserId = [1,2 ,3].length
 
 /* TODO: Maybe use configs for endpoints instead, for consistency? */
 // POST Add to?  Semantically correct?
@@ -39,7 +42,7 @@ app.post("/AddBookToLibrary",
 
 //TODO: Is registration more of a post?
 app.put('/Register', 
-    Register.Register(usersToPass)
+    Register.Register
 )
 
 // Semantics?
@@ -49,7 +52,7 @@ app.put('/AddToCart',
 )
 
 app.put('/Login', 
-    Login.Login(usersToPass)
+    Login.Login
 )
 
 app.put('/Logout', 
@@ -74,6 +77,11 @@ app.put('/CheckIn',
 app.put('/CheckOut',
     SessionManagement.VerifyLoggedIn,
     CheckInOut.CheckOut
+)
+
+//TODO: Debugging purpsoses only, like drop tables
+app.get('/Users',
+    UsersDAL.getallusersEndpoint
 )
 
 app.listen(8080)

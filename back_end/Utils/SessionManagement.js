@@ -1,3 +1,5 @@
+//TODO: To user id instead, and add db call to store user info like name and email
+// w/ unique id 
 var sessIdToUsername = {}
 
 //Middleware to verify that user is logged in

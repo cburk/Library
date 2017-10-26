@@ -3,6 +3,7 @@ var UpdateDAL = require('../DataAccess/UpdateFields')
 var config = require("config")
 var NO_BORROWER = config.NO_BORROWER
 
+
 var CheckOutBook = (RelevantBook, bookId, Name, res) => {
 	if(RelevantBook.available){
         UpdateDAL.ChangeAvailability(bookId, false)
@@ -41,6 +42,6 @@ module.exports = {
     }
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"BookId":"2f0c62e721ef3ca890fc917013bab0e0"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/CheckIn
+// curl -X PUT -H "Content-Type: application/json" -d '{"BookId":"f4785bd80fdd082525ac6fd34aea73d8"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/CheckIn
 // curl -X PUT -H "Content-Type: application/json" -d '{"BookId":"f4785bd80fdd082525ac6fd34aea73d8"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/CheckOut
 

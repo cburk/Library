@@ -1,6 +1,8 @@
 {
     "BASE_URI": "mongodb://localhost:27017",
     "ALL_BOOKS_COLLECTION": "AllBooks",
+    "ALL_USERS_COLLECTION": "Users",    
     "DB_LOCATION": "/Library",
-    "NO_BORROWER": ""
+    "NO_BORROWER": "",
+    "SALT": "TODO_SECRET_REPLACE_IN_PROD"
 } 
