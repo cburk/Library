@@ -1,4 +1,4 @@
-var sessIdToUsername = {"a":"B"}
+var sessIdToUsername = {}
 
 //Middleware to verify that user is logged in
 VerifyLogin = (req, res, next) => {
@@ -15,6 +15,7 @@ VerifyLogin = (req, res, next) => {
 Establish = (req, username) => {
     //Initialize session
     req.session.cart = []
+    //TODO: Set session to expire after a certain amount of time
     //Note which user this session belongs to
     sessIdToUsername[req.session.id] = username
 

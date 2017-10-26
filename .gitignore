@@ -2,4 +2,5 @@
 /node_modules
 /*.txt
 /sessions
+/sessions/*
 .DS_Store
