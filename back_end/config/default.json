@@ -1,5 +1,6 @@
 {
     "BASE_URI": "mongodb://localhost:27017",
     "ALL_BOOKS_COLLECTION": "AllBooks",
-    "DB_LOCATION": "/Library"
+    "DB_LOCATION": "/Library",
+    "NO_BORROWER": ""
 } 

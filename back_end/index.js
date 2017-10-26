@@ -5,6 +5,7 @@ var AddBookToLibrary = require('./endpoints/AddBookToLibrary')
 var Register = require('./endpoints/Register')
 var Logout = require('./endpoints/Logout')
 var GetBooks = require('./endpoints/GetAllBooks')
+var CheckInOut = require('./endpoints/CheckInOut')
 var express = require('express')
 var bodyParser = require('body-parser')
 
@@ -52,6 +53,7 @@ app.put('/Login',
 )
 
 app.put('/Logout', 
+    SessionManagement.VerifyLoggedIn,
     Logout.Logout
 )
 
@@ -62,6 +64,16 @@ app.get('/BookList',
 //TODO: Definitely needs to leave code for production
 app.put('/DropCollections',
     DropCollections.DropAllCollections
+)
+
+app.put('/CheckIn',
+    SessionManagement.VerifyLoggedIn,
+    CheckInOut.CheckIn
+)
+
+app.put('/CheckOut',
+    SessionManagement.VerifyLoggedIn,
+    CheckInOut.CheckOut
 )
 
 app.listen(8080)

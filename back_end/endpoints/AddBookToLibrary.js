@@ -1,6 +1,8 @@
 var md5 = require('md5')
 var datetime = require('node-datetime')
 var DataAccessLayer = require('../DataAccess/AddBookToLibrary')
+var config = require('config');
+var NO_BORROWER = config.NO_BORROWER;
 
 //TODO: Maybe refactor to be LibaryEndpoints, and include the gets, posts, and dels/rems?
 
@@ -8,7 +10,7 @@ var AddToLibrary = (req, res) => {
 	console.log("Adding book to library w/ id: " + req.body.id);
 	//TODO: Flesh out book object more
 	var bookUID = md5(req.body.title + datetime.create().now())
-	var book = {bookId: bookUID, title: req.body.title, author: req.body.author, owner: req.username, available: true}
+	var book = {bookId: bookUID, borrower: NO_BORROWER, title: req.body.title, author: req.body.author, owner: req.username, available: true}
 	DataAccessLayer.AddBookToListOfAllBooks(book)
 	console.log(book)
 
@@ -21,4 +23,4 @@ module.exports = {
 }
 
 
-// curl -X POST -H "Content-Type: application/json" -d '{"title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
+// curl -X POST -H "Content-Type: application/json" -d '{"borrower":"Proust", "title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary

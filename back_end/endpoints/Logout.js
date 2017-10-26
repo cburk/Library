@@ -7,6 +7,7 @@ var Logout = (req, res) => {
 
     console.log(req.body);
 
+    //TODO: Delete session
 
     res.send('asdf');
 }

@@ -6,7 +6,7 @@ var DB_LOCATION = cfgManager.DB_LOCATION
 
 var GetAllBooksList = (callbackFunc) => {
         console.log("In Get All books");
-        MongoClient.connect(BASE_URI + "/Library", function(err, db) {
+        MongoClient.connect(BASE_URI + DB_LOCATION, function(err, db) {
 		if(!err) {
 			console.log("We are connected");
 			
@@ -14,7 +14,8 @@ var GetAllBooksList = (callbackFunc) => {
 			AllBooksCollection.find().toArray((err, res) => {
 				if(err){ console.log("Query returned error: " + err ) }
 				console.log("Query res: ")
-				var results = []
+                var results = []
+                //TODO: Why not just pass back all?  Was that just debugging?
 				res.forEach((el) => {
 					//console.log("{id: " + el.id + "}")
 					results.push(el)
@@ -25,7 +26,28 @@ var GetAllBooksList = (callbackFunc) => {
 	});
 }
 
+GetBookById = (bookId, callbackFunc) => {
+    console.log("In Get single book: " + bookId);
+    MongoClient.connect(BASE_URI + DB_LOCATION, function(err, db) {
+        if(!err) {
+            console.log("We are connected");
+            
+            var AllBooksCollection = db.collection(ALL_BOOKS_COLLECTION);
+
+            AllBooksCollection.findOne({bookId: bookId}, (err, res) => {
+                if(err){ console.log("Query returned error: " + err ); return }
+                console.log("Found results: " + res)
+                callbackFunc(res)
+            })
+        }
+    });
+
+}
+
+
+
 module.exports = {
-    GetAllBooksList: GetAllBooksList
+    GetAllBooksList: GetAllBooksList,
+    GetBookById: GetBookById
 }
 
