@@ -1,0 +1,8 @@
+{
+    "server": {
+      "baseDir": "front_end",
+      "routes": {
+        "/node_modules": "node_modules"
+      }
+    }
+  }
