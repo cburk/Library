@@ -19,6 +19,8 @@
 ## Example Request Sequence:
     
     ```
+    curl localhost:8080/BookList
+
     curl -X PUT -H "Content-Type: application/json" -d '{"username":"ian", "password":"curtis"}' -c mySessionStore.txt -b mySessionStore.txt localhost:8080/Register
     
     curl -X PUT -H "Content-Type: application/json" -d '{"username":"ian", "password":"curtis"}' -c mySessionStore.txt -b mySessionStore.txt localhost:8080/Login

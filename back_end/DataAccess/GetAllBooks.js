@@ -44,10 +44,29 @@ GetBookById = (bookId, callbackFunc) => {
 
 }
 
+GetBooksByUsername = (bookId, callbackFunc) => {
+    console.log("In Get single book: " + bookId);
+    MongoClient.connect(BASE_URI + DB_LOCATION, function(err, db) {
+        if(!err) {
+            console.log("We are connected");
+            
+            var AllBooksCollection = db.collection(ALL_BOOKS_COLLECTION);
+
+            AllBooksCollection.findOne({bookId: bookId}, (err, res) => {
+                if(err){ console.log("Query returned error: " + err ); return }
+                console.log("Found results: " + res)
+                callbackFunc(res)
+            })
+        }
+    });
+
+}
+
 
 
 module.exports = {
     GetAllBooksList: GetAllBooksList,
-    GetBookById: GetBookById
+    GetBookById: GetBookById,
+    GetBooksByUsername: GetBooksByUsername
 }
 

@@ -1,7 +1,7 @@
 /*eslint-env node*/
 var Login = require('./endpoints/Login')
 var AddToCart = require('./endpoints/AddToCart')
-var AddBookToLibrary = require('./endpoints/AddBookToLibrary')
+var AddRemoveBookFromLibrary = require('./endpoints/AddRemoveBookFromLibrary')
 var Register = require('./endpoints/Register')
 var Logout = require('./endpoints/Logout')
 var GetBooks = require('./endpoints/GetAllBooks')
@@ -37,7 +37,12 @@ Register.NextUserId = [1,2 ,3].length
 // POST Add to?  Semantically correct?
 app.post("/AddBookToLibrary", 
     SessionManagement.VerifyLoggedIn,
-    AddBookToLibrary.AddBookToLibrary
+    AddRemoveBookFromLibrary.AddBookToLibrary
+)
+
+app.post("/RemoveBookFromLibrary", 
+SessionManagement.VerifyLoggedIn,
+AddRemoveBookFromLibrary.RemoveBookFromLibrary
 )
 
 //TODO: Is registration more of a post?

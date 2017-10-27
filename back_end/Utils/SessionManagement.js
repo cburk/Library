@@ -2,7 +2,7 @@
 // w/ unique id 
 var sessIdToUsername = {}
 
-//Middleware to verify that user is logged in
+//Middleware to verify that user is logged in, inform backend of user's identity
 VerifyLogin = (req, res, next) => {
     if(sessIdToUsername[req.session.id] == null){
         console.log("No session found, returning unauthorized");
