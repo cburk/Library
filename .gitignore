@@ -6,4 +6,6 @@
 .DS_Store
 /*.js
 /front_end/*.js
+/front_end/*.js.map
 /front_end/app/*.js
+/front_end/app/*.js.map
