@@ -1,5 +1,11 @@
 # MyApp
 
+*Note from Christian:*
+*This is based off of instructions from here: https://angular.io/tutorial/toh-pt1*
+*To test, run ng serve --open*
+*To run the first time, need to run npm install in this dir.  If permission errors occur, follow this tutorial: https://angular.io/tutorial/toh-pt1*
+*The gist of it is to install and update node w/ nvm before you can globally install angular-cli*
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server
