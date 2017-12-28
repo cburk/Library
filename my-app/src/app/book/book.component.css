@@ -1,0 +1,20 @@
+li {
+    border: medium none;
+    display: block;
+    margin: 40px;
+}
+
+.book-list {
+    background: black;
+    color: lightgrey;
+}
+
+.book {
+    outline-color: red;
+    outline-width: 15px;
+    outline-style: solid;
+    margin: 10px 20px 5px;
+    border-style: none;
+    background: black;
+    color: lightgrey;
+}
