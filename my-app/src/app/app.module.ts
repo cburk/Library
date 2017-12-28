@@ -17,7 +17,7 @@ import { LibrariesComponent } from './libraries/libraries.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

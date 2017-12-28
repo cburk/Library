@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../book';
-import { BOOKS } from '../mock-books'
 
 @Component({
   selector: 'app-book',
@@ -8,8 +7,8 @@ import { BOOKS } from '../mock-books'
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
-  books: Book[] = BOOKS;
-  
+  @Input() books: Book[];
+
   constructor() { }
 
   ngOnInit() {

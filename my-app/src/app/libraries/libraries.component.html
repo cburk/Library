@@ -2,7 +2,16 @@
   <p>
     libraries
   </p>
-  <div class="library">
-    <span><button (click)="library.lockButtonClicked()">{{library.lockButtonText}}</button> {{library.name}}, located at: {{library.location}}</span>
+  <div class="search-bar">
+    <input [(ngModel)]="query">
+    <button (click)="searchForLibrary(query)">Search</button>
+  </div>
+  <div *ngFor="let library of libraries">
+    <div class="library">
+      <span><button (click)="library.lockButtonClicked()">{{library.lockButtonText}}</button> {{library.name}}, located at: {{library.location}}<button (click)="library.toggleBrowse()">Toggle browse</button></span>
+      <div *ngIf="library.isBrowsing">
+        <app-book [books]="library.contents"></app-book>
+      </div>
+    </div>
   </div>
 </div>

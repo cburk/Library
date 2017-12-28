@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Library } from '../library'
+import { LIBRARIES } from '../mock-libraries'
 
 @Component({
   selector: 'app-libraries',
@@ -9,7 +10,18 @@ import { Library } from '../library'
 export class LibrariesComponent implements OnInit {
   lockText: string = "Unlock";
 
-  library: Library = new Library("Library 1", "123 N 1st St", true);
+  allLibraries: Library[] = LIBRARIES;
+  libraries: Library[] = LIBRARIES;
+
+  // TODO: Can probably break out into own component
+  query: string;
+  searchForLibrary(query: string) {
+    if(query == ""){
+      this.libraries = this.allLibraries
+    }else{
+      this.libraries = this.allLibraries.filter(lib => lib.name == query);
+    }
+  }
 
   constructor() { }
 
