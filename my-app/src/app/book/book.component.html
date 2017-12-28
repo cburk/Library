@@ -1,6 +1,10 @@
 <p>
-  This is a book!
+  This is a list of all the library's books:
 </p>
-<p>Title: {{title}}</p>
-<p>Author: {{author}}</p>
-<img src="{{coverImg}}" />
+<ul class="books">
+  <li *ngFor="let book of books">
+      <h2 class="badge">{{book.title}}</h2>
+      <h3>Author: {{book.author}}</h3>
+      <img src="{{book.coverImg}}" />
+  </li>
+</ul>
