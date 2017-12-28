@@ -4,6 +4,11 @@ li {
     margin: 40px;
 }
 
+.book-list {
+    background: black;
+    color: lightgrey;
+}
+
 .book {
     outline-color: red;
     outline-width: 15px;
