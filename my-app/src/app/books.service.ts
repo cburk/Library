@@ -20,8 +20,8 @@ export class BooksService {
     return of(LIBRARIES);
   }
 
-  getBooksForLibrary(libraryName: string): Book[]
+  getBooksForLibrary(libraryName: string): Observable<Book[]>
   {
-    return BOOKS;
+    return of(BOOKS);
   }
 }
