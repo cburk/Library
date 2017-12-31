@@ -16,7 +16,7 @@ Represents the page/detailed view for a specific library
 */
 export class LibraryComponent implements OnInit {
   library: Library;
-  libId: string = "SAMPLE LIB NAME";
+  libId: string;
 
   initLibrary()
   {
@@ -28,7 +28,7 @@ export class LibraryComponent implements OnInit {
     // Sample text for individual lib
     this.bs.getLibraryById(this.libId)
       .subscribe(lib => {
-        if(lib == null){
+        if(lib == Library.InvalidLibrary){
           console.log("Library not found!  Should redir to 404");
         }
         this.library = lib;

@@ -18,29 +18,32 @@ export class BooksService {
   // and b/c contents would only change infrequently
   private libraries: Library[];
 
-  getAllLibraries(): Observable<Library[]>
-  {
-    console.log("in service");
-    if(this.libraries == null || this.libraries.length == 0) {
-      console.log("initializing libs list");
+  private initializeLibrariesIfUninitialized(){
+    if(this.libraries == null) {
+      console.log("Libraries list is uninitialized, initializing...");
       // TODO: web req to backend
       this.libraries = LIBRARIES;
     }
+  }
+
+  getAllLibraries(): Observable<Library[]>
+  {
+    console.log("getAllLibraries called");
+    this.initializeLibrariesIfUninitialized();
+    
     return of(this.libraries);
   }
 
   getLibraryById(libraryName: string): Observable<Library>{
+    console.log("getLibraryById called");
+    this.initializeLibrariesIfUninitialized();
+
     var matchingLibs = this.libraries.filter(lib => lib.name == libraryName);
 
     if(matchingLibs.length != 0){
       return of(matchingLibs[0]);
     }
     // If no such library exists
-    return null;
-  }
-
-  getBooksForLibrary(libraryName: string): Observable<Book[]>{
-    console.log("WARNING: Not implemented");
-    return of(BOOKS);
+    return of(Library.InvalidLibrary);
   }
 }

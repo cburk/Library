@@ -10,6 +10,9 @@ export class Library{
     lockButtonText: string;
     isBrowsing: boolean = false;
 
+    // Invalid library for when a service call to get library fails
+    public static InvalidLibrary: Library = new Library("N/A", "N/A", false, null);
+
     lockButtonClicked(): void{
         console.log("Unlock button clicked, was: " + this.isLocked);
         this.isLocked = !this.isLocked;
