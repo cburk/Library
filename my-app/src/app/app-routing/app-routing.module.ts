@@ -8,7 +8,7 @@ import { LibraryComponent } from '../library/library.component'
 const routes: Routes = [
   { path: '', component: LibrariesComponent },
   { path: 'libraries', component: LibrariesComponent },
-  { path: 'books', component: LibraryComponent },
+  { path: 'library/:name', component: LibraryComponent },
 ];
 
 @NgModule({

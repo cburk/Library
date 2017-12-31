@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Library } from '../library';
 import { BooksService } from '../books.service';
 
@@ -17,15 +20,26 @@ export class LibraryComponent implements OnInit {
 
   initLibrary()
   {
+    // Get this lib's name/id
+    // use + to convert to int
+    this.libId = this.route.snapshot.params['name'];
+    console.log("found id: " + this.libId);
+
     // Sample text for individual lib
-    this.bs.getBooksForLibrary(this.libId)
-      .subscribe(books => {
-        this.library = new Library(this.libId, "SAMPLE LOC REPLACE", true, books);
+    this.bs.getLibraryById(this.libId)
+      .subscribe(lib => {
+        if(lib == null){
+          console.log("Library not found!  Should redir to 404");
+        }
+        this.library = lib;
       });
   }
 
   // TODO: library id
-  constructor(private bs: BooksService) { }
+  constructor(private bs: BooksService,
+              private route: ActivatedRoute,
+              private location: Location
+            ) { }
 
   // TODO: library id
   ngOnInit() {

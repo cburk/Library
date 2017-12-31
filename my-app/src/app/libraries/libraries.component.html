@@ -7,8 +7,8 @@
     <button (click)="searchForLibrary(query)">Search</button>
   </div>
   <div *ngFor="let library of libraries">
-    <div class="library-overview">
+    <a routerLink="/library/{{library.name}}">
       <span>{{library.name}}, located at: {{library.location}}.  Locked: {{library.isLocked}}</span>
-    </div>
+    </a>
   </div>
 </div>
