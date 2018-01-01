@@ -32,7 +32,7 @@ export class Library{
             return "Unlock Button";
     }
 
-    constructor(name: string, loc: string, locked: boolean, contents: Book[]) {
+    constructor(name: string, loc: string, locked: boolean = true, contents: Book[]) {
         this.name = name;
         this.location = loc;
         this.isLocked = locked;

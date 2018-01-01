@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
@@ -9,6 +10,8 @@ import { Book } from './book';
 import { BOOKS } from './mock-books';
 import { LIBRARIES } from './mock-libraries';
 
+// TODO: Maybe refactor into separate books and library services, w/
+// the latter using the former
 @Injectable()
 export class BooksService {
 
