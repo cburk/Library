@@ -6,6 +6,7 @@ var Register = require('./endpoints/Register')
 var Logout = require('./endpoints/Logout')
 var GetBooks = require('./endpoints/GetAllBooks')
 var CheckInOut = require('./endpoints/CheckInOut')
+var LibraryCRUD = require('./endpoints/LibraryCRUD');
 var express = require('express')
 var bodyParser = require('body-parser')
 
@@ -33,10 +34,13 @@ app.use(session({
 
 Register.NextUserId = [1,2 ,3].length
 
+//TODO: middleware to sanitize all inputs for XSS/security reasons
+
 /* TODO: Maybe use configs for endpoints instead, for consistency? */
 // POST Add to?  Semantically correct?
+// TODO: Make it so you need to be logged in for this again, maybe priveleged
 app.post("/AddBookToLibrary", 
-    SessionManagement.VerifyLoggedIn,
+    //SessionManagement.VerifyLoggedIn,
     AddRemoveBookFromLibrary.AddBookToLibrary
 )
 
@@ -65,10 +69,6 @@ app.put('/Logout',
     Logout.Logout
 )
 
-app.get('/BookList',
-    GetBooks.GetAllBooksEndpoint
-)
-
 //TODO: Definitely needs to leave code for production
 app.put('/DropCollections',
     DropCollections.DropAllCollections
@@ -87,6 +87,19 @@ app.put('/CheckOut',
 //TODO: Debugging purpsoses only, like drop tables
 app.get('/Users',
     UsersDAL.getallusersEndpoint
+)
+
+app.get('/BookList',
+    GetBooks.GetAllBooksEndpoint
+)
+
+app.get('/Libraries',
+    LibraryCRUD.GetAllLibrariesEndpoint
+)
+
+app.put('/Libraries',
+    // TODO: Make this a priveleged action/add login
+    LibraryCRUD.CreateLibrary
 )
 
 app.listen(8080)

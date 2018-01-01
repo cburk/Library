@@ -5,13 +5,13 @@ var QueryDAL = require('../DataAccess/GetAllBooks')
 var config = require('config');
 var NO_BORROWER = config.NO_BORROWER
 
-//TODO: Maybe refactor to be LibaryEndpoints, and include the gets, posts, and dels/rems?
-
+//TODO: Maybe refactor to be bookEndpoints/booksCRUD, and include the gets, posts, and dels/rems?
+// Big TODO: sanitize all input
 var AddToLibrary = (req, res) => {
 	console.log("Adding book to library w/ id: " + req.body.id);
 	//TODO: Flesh out book object more
 	var bookUID = md5(req.body.title + datetime.create().now())
-	AddRemoveDAL.AddBookToLibrary(bookUID, NO_BORROWER, req.body.title, req.body.author, req.username, true)
+	AddRemoveDAL.AddBookToLibrary(bookUID, req.body.LibraryId, NO_BORROWER, req.body.title, req.body.author, req.username, true)
 
 	//TODO: Should eventually be unlocking the case so users can put the book in
 	res.sendStatus(200)
@@ -48,7 +48,7 @@ module.exports = {
 	RemoveBookFromLibrary: RemoveBookFromLibrary
 }
 
-// curl -X POST -H "Content-Type: application/json" -d '{"bookId":"64c37170ddcd1709c0cb6ad76041f94f"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/RemoveBookFromLibrary
+// curl -X POST -H "Content-Type: application/json" -d '{"title":"the sun also rises", "libraryId":"fa0c2bc424699149a97f1efd6d9b604b", "author":"Hemingway", "username":"ian"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
 
 // curl -X POST -H "Content-Type: application/json" -d '{"borrower":"Proust", "title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
 // curl -X POST -H "Content-Type: application/json" -d '{"borrower":"Proust", "title":"V", "author":"Thomas Pynchon"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
