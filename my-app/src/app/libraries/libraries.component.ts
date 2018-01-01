@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Library } from '../library'
-import { LIBRARIES } from '../mock-libraries'
+import { BooksService } from 'app/books.service';
 
 @Component({
   selector: 'app-libraries',
@@ -10,8 +10,10 @@ import { LIBRARIES } from '../mock-libraries'
 export class LibrariesComponent implements OnInit {
   lockText: string = "Unlock";
 
-  allLibraries: Library[] = LIBRARIES;
-  libraries: Library[] = LIBRARIES;
+  // The master list of all libraries
+  allLibraries: Library[];
+  // The list of libraries being displayed on the main page
+  libraries: Library[];
 
   // TODO: Can probably break out into own component
   query: string;
@@ -23,9 +25,24 @@ export class LibrariesComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  initializeLibrariesLists()
+  {
+    this.booksService.getAllLibraries()
+      .subscribe(libs => {
+        this.allLibraries = libs;
+        this.libraries = libs;
+      });
+  }
+
+  /*
+   Typical angular pattern (as per https://angular.io/tutorial/toh-pt4),
+   just use constructor for dependency injection / keeping track
+   of passed in parameters, do all real initialization in ngOnInit
+   */
+  constructor(private booksService: BooksService) { }
 
   ngOnInit() {
+    this.initializeLibrariesLists();
   }
 
 }

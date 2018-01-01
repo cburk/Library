@@ -62,8 +62,6 @@ GetBooksByUsername = (bookId, callbackFunc) => {
 
 }
 
-
-
 module.exports = {
     GetAllBooksList: GetAllBooksList,
     GetBookById: GetBookById,
