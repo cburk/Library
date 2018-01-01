@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p ./front_end/",
-    "build:e2e": "tsc -p e2e/",    
+    "build:e2e": "tsc -p e2e/",
     "serve": "lite-server -c=bs-config.json",
-    "serve:e2e": "lite-server -c=bs-config.e2e.json",    
+    "serve:e2e": "lite-server -c=bs-config.e2e.json",
     "build:watch": "tsc -p front_end/ -w",
     "prestart": "npm run build",
     "start": "concurrently \"npm run build:watch\" \"npm run serve\""

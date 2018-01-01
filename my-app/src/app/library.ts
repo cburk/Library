@@ -1,6 +1,7 @@
 import { Book } from './book';
 
 export class Library{
+    id: string;
     name: string;
     location: string;  
     isLocked: boolean;

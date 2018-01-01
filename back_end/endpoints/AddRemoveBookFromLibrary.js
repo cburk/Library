@@ -48,7 +48,7 @@ module.exports = {
 	RemoveBookFromLibrary: RemoveBookFromLibrary
 }
 
-// curl -X POST -H "Content-Type: application/json" -d '{"title":"the sun also rises", "libraryId":"fa0c2bc424699149a97f1efd6d9b604b", "author":"Hemingway", "username":"ian"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
+// curl -X POST -H "Content-Type: application/json" -d '{"title":"the sun also rises", "LibraryId":"fa0c2bc424699149a97f1efd6d9b604b", "author":"Hemingway", "username":"ian"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
 
 // curl -X POST -H "Content-Type: application/json" -d '{"borrower":"Proust", "title":"Pale Fire", "author":" Vladimir Nabokov"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary
 // curl -X POST -H "Content-Type: application/json" -d '{"borrower":"Proust", "title":"V", "author":"Thomas Pynchon"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/AddBookToLibrary

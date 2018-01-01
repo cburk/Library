@@ -27,11 +27,10 @@ export class LibrariesComponent implements OnInit {
 
   initializeLibrariesLists()
   {
-    this.booksService.getAllLibraries()
-      .subscribe(libs => {
-        this.allLibraries = libs;
-        this.libraries = libs;
-      });
+    this.booksService.getAllLibraries().subscribe(libs => {
+      this.allLibraries = libs;
+      this.libraries = libs;  
+    });
   }
 
   /*
