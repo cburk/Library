@@ -1,4 +1,7 @@
 <span><button (click)="library.lockButtonClicked()">{{library.lockButtonText}}</button> {{library.name}}, located at: {{library.location}}</span>
+<p> 
+  <a routerLink="/AddBook/{{library.id}}">Add a book</a>
+</p>
 <app-book [books]="library.contents"></app-book>
 
 <!--

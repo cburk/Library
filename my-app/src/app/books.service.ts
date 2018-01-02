@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import 'rxjs/add/operator/filter';
 
 import { Library } from './library';
 import { Book } from './book';
@@ -76,14 +77,16 @@ export class BooksService {
 
   getLibraryById(id: string): Observable<Library>{
     console.log("getLibraryById called");
-    this.initializeLibrariesIfUninitialized();
 
-    var matchingLibs = this.libraries.filter(lib => lib.id == id);
-
-    if(matchingLibs.length != 0){
-      return of(matchingLibs[0]);
-    }
-    // If no such library exists
-    return of(Library.InvalidLibrary);
+    return new Observable(observer => {
+      this.initializeLibrariesIfUninitialized().subscribe(libs => {
+        console.log("In here")
+        var matches = this.libraries.find(lib => lib.id == id)
+        console.log("matches")
+        console.log(matches)
+        observer.next(matches != undefined ? matches : Library.InvalidLibrary)
+        observer.complete()
+      })
+    })
   }
 }

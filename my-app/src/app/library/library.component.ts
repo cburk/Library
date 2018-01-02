@@ -15,7 +15,7 @@ import { BooksService } from '../books.service';
 Represents the page/detailed view for a specific library
 */
 export class LibraryComponent implements OnInit {
-  library: Library;
+  library: Library = Library.InvalidLibrary; // TODO: Make this a placeholder library maybe? Don't display if it's null?
   libId: string;
 
   initLibrary()
@@ -25,7 +25,6 @@ export class LibraryComponent implements OnInit {
     this.libId = this.route.snapshot.params['name'];
     console.log("found id: " + this.libId);
 
-    // Sample text for individual lib
     this.bs.getLibraryById(this.libId)
       .subscribe(lib => {
         if(lib == Library.InvalidLibrary){

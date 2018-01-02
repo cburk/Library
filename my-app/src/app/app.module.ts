@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { LibrariesComponent } from './libraries/libraries.component';
 import { LibraryComponent } from './library/library.component';
+import { AddBookComponent } from './add-book/add-book.component'
 
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
@@ -18,7 +19,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     AppComponent,
     BookComponent,
     LibrariesComponent,
-    LibraryComponent
+    LibraryComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
