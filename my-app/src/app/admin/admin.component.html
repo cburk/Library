@@ -1,0 +1,8 @@
+<div>
+  <h3>Add a book to library:</h3>
+  <div *ngFor="let library of libraries">
+    <a routerLink="/AddBook/{{library.id}}">
+      <span>{{library.name}}, located at: {{library.location}}</span>
+    </a>
+  </div>  
+</div>

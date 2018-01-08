@@ -5,12 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LibrariesComponent } from '../libraries/libraries.component'
 import { LibraryComponent } from '../library/library.component'
 import { AddBookComponent } from '../add-book/add-book.component'
+import { AdminComponent } from '../admin/admin.component'
 
 const routes: Routes = [
   { path: '', component: LibrariesComponent },
   { path: 'Libraries', component: LibrariesComponent },
   { path: 'Library/:name', component: LibraryComponent },
-  { path: 'AddBook/:libraryId', component: AddBookComponent }
+  { path: 'AddBook/:libraryId', component: AddBookComponent },
+  { path: 'Admin', component: AdminComponent }
 ];
 
 @NgModule({

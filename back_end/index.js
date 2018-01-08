@@ -48,7 +48,7 @@ app.post("/AddBookToLibrary",
 )
 
 app.post("/RemoveBookFromLibrary", 
-SessionManagement.VerifyLoggedIn,
+//SessionManagement.VerifyLoggedIn,
 AddRemoveBookFromLibrary.RemoveBookFromLibrary
 )
 
@@ -59,7 +59,7 @@ app.put('/Register',
 
 // Semantics?
 app.put('/AddToCart',
-    SessionManagement.VerifyLoggedIn,
+    //SessionManagement.VerifyLoggedIn,
     AddToCart.AddToCart
 )
 
@@ -68,7 +68,7 @@ app.put('/Login',
 )
 
 app.put('/Logout', 
-    SessionManagement.VerifyLoggedIn,
+    //SessionManagement.VerifyLoggedIn,
     Logout.Logout
 )
 
@@ -78,12 +78,12 @@ app.put('/DropCollections',
 )
 
 app.put('/CheckIn',
-    SessionManagement.VerifyLoggedIn,
+    //SessionManagement.VerifyLoggedIn,
     CheckInOut.CheckIn
 )
 
 app.put('/CheckOut',
-    SessionManagement.VerifyLoggedIn,
+    //SessionManagement.VerifyLoggedIn,
     CheckInOut.CheckOut
 )
 

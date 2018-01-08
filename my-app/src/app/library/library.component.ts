@@ -34,13 +34,11 @@ export class LibraryComponent implements OnInit {
       });
   }
 
-  // TODO: library id
   constructor(private bs: BooksService,
               private route: ActivatedRoute,
               private location: Location
             ) { }
 
-  // TODO: library id
   ngOnInit() {
     this.initLibrary();
   }

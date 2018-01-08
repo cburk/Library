@@ -11,6 +11,7 @@ import { BookComponent } from './book/book.component';
 import { LibrariesComponent } from './libraries/libraries.component';
 import { LibraryComponent } from './library/library.component';
 import { AddBookComponent } from './add-book/add-book.component'
+import { AdminComponent } from './admin/admin.component'
 
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
@@ -20,7 +21,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     BookComponent,
     LibrariesComponent,
     LibraryComponent,
-    AddBookComponent
+    // To add/remove libs and items from them
+    AdminComponent,
+    AddBookComponent,
+
   ],
   imports: [
     BrowserModule,
