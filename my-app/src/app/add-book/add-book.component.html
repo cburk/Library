@@ -1,6 +1,17 @@
 <div class="add-book-form">
-  <label>Work title: <input type="text" ng-model="user.name" /></label><br />
-  <label>Author: <input type="text" ng-model="author" /></label><br />
 
-  <button>Add book to {{library.name}}</button>
+  <!-- TODO: Break out into book entry form maybe? --> 
+  <form (ngSubmit)="verifyAndAdd()">
+    <label>
+      Work title: <input id="title" type="text" [(ngModel)]="book.title" name="title"/>
+    </label><br />
+    <label for="author">
+      Author: <input id="author" type="text" [(ngModel)]="book.author" name="title"/>
+    </label><br />
+    
+    <div ng-if='error==null || .length > 0'>
+        <label>Error and/or Response Message: {{error}}</label><br />
+    </div>
+    <button type="submit">Add book to {{library.name}}</button>    
+  </form>
 </div>

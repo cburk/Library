@@ -72,7 +72,7 @@ app.put('/Logout',
     Logout.Logout
 )
 
-//TODO: Definitely needs to leave code for production
+//TODO: Definitely needs to leave out for production
 app.put('/DropCollections',
     DropCollections.DropAllCollections
 )
@@ -100,7 +100,7 @@ app.get('/Libraries',
     LibraryCRUD.GetAllLibrariesEndpoint
 )
 
-app.put('/Libraries',
+app.post('/Libraries',
     // TODO: Make this a priveleged action/add login
     LibraryCRUD.CreateLibrary
 )

@@ -8,13 +8,12 @@ var NO_BORROWER = config.NO_BORROWER
 //TODO: Maybe refactor to be bookEndpoints/booksCRUD, and include the gets, posts, and dels/rems?
 // Big TODO: sanitize all input
 var AddToLibrary = (req, res) => {
-	console.log("Adding book to library w/ id: " + req.body.id);
+	console.log("Req.body: " + req.body)
+	console.log("Adding book to library w/ id: " + req.body.libraryId);
 	//TODO: Flesh out book object more
 	var bookUID = md5(req.body.title + datetime.create().now())
-	AddRemoveDAL.AddBookToLibrary(bookUID, req.body.LibraryId, NO_BORROWER, req.body.title, req.body.author, req.username, true)
-
-	//TODO: Should eventually be unlocking the case so users can put the book in
-	res.sendStatus(200)
+	//TODO: Maybe start out w/ requester having the book checked out
+	AddRemoveDAL.AddBookToLibrary(req, res, bookUID, req.body.libraryId, NO_BORROWER, req.body.title, req.body.author, req.username, true)
 }
 
 var RemoveBookFromLibrary = (req, res) => {
@@ -35,8 +34,7 @@ var RemoveBookFromLibrary = (req, res) => {
 			return
 			//TODO: Maybe make it so that no one else can take it?
 		}else{
-			AddRemoveDAL.RemoveBookFromLibrary(req.body.bookId)
-			res.sendStatus(200)
+			AddRemoveDAL.RemoveBookFromLibrary(req, res, req.body.bookId)
 		}
 	})
 

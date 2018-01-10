@@ -19,7 +19,10 @@ var GetAllBooksList = (callbackFunc) => {
 				res.forEach((el) => {
 					//console.log("{id: " + el.id + "}")
 					results.push(el)
-				})
+                })
+                
+                console.log(results);
+                
 				callbackFunc(results)
 			})
 		}

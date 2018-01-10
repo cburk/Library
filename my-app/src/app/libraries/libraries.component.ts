@@ -18,11 +18,14 @@ export class LibrariesComponent implements OnInit {
   // TODO: Can probably break out into own component
   query: string;
   searchForLibrary(query: string) {
+    console.log("=nll? " + query==null)
+    console.log(this.query)
     if(query == ""){
       this.libraries = this.allLibraries
     }else{
       this.libraries = this.allLibraries.filter(lib => lib.name == query);
     }
+    console.log("Now: " + this.libraries)
   }
 
   initializeLibrariesLists()

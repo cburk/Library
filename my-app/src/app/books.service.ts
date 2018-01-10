@@ -6,10 +6,7 @@ import 'rxjs/add/operator/filter';
 
 import { Library } from './library';
 import { Book } from './book';
-
-// Mocks, to be replaced w/ service calls
-import { BOOKS } from './mock-books';
-import { LIBRARIES } from './mock-libraries';
+import { HttpResponse } from '@angular/common/http/src/response';
 
 // TODO: Maybe refactor into separate books and library services, w/
 // the latter using the former
@@ -69,6 +66,9 @@ export class BooksService {
   }
 
   // curl localhost:8080/Libraries
+  /*
+   *  Library actions (get, get:id, put)
+   */
   getAllLibraries(): Observable<Library[]>
   {
     console.log("getAllLibraries called");
@@ -77,7 +77,7 @@ export class BooksService {
 
   getLibraryById(id: string): Observable<Library>{
     console.log("getLibraryById called");
-
+  
     return new Observable(observer => {
       this.initializeLibrariesIfUninitialized().subscribe(libs => {
         console.log("In here")
@@ -88,5 +88,30 @@ export class BooksService {
         observer.complete()
       })
     })
+  }
+
+  // Returns detailed error message or ok
+  createLibrary(library: Library): Observable<any>{
+    // Service should maintain the local copy for efficiency reasons
+    this.libraries.push(library)
+
+    // TODO maybe? Pull validation out into here, and then either an error is returned locally or the 
+    // web error is returned
+    return this.httpCli.post<string>(this.librariesUrl, library, {headers: this.headers})
+  }
+
+  /*
+   * Book actions (get, create, etc)
+   */
+  // Returns detailed error message or ok
+  createBook(book: Book): Observable<any>{
+    // Service should maintain the local copy for efficiency reasons
+    this.getLibraryById(book.libraryId).subscribe(lib => {
+      lib.contents.push(book)
+    })
+
+    return this.httpCli.post<string>(this.baseUrl + "/AddBookToLibrary", 
+      book
+    );
   }
 }

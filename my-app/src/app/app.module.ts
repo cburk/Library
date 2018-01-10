@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BooksService } from './books.service';
 
 import { AppComponent } from './app.component';
@@ -16,6 +15,7 @@ import { AdminComponent } from './admin/admin.component'
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
 @NgModule({
+  // Things the module needs that I write
   declarations: [
     AppComponent,
     BookComponent,
@@ -24,15 +24,14 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     // To add/remove libs and items from them
     AdminComponent,
     AddBookComponent,
-
   ],
+  // Things that are built in that the module needs
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
-    FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   // Providers are used for dependency injection.  Services go here
   providers: [BooksService],
