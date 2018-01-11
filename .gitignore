@@ -3,6 +3,7 @@
 /*.txt
 /sessions
 /sessions/*
+/sessions/**
 .DS_Store
 /*.js
 /front_end/*.js
