@@ -90,6 +90,17 @@ export class BooksService {
     })
   }
 
+  // TODO: Really need an option to get library always from server.  
+  // Library component should poll every 10 seconds or something like that
+
+  // Locking/unlocking should return {"Response":"Locked/Unlocked successfully"}
+  lockLibrary(id: string): Observable<string>{
+    return this.httpCli.put<string>(this.librariesUrl + '/' + id + '/Lock', "");
+  }
+  unlockLibrary(id: string): Observable<string>{
+    return this.httpCli.put<string>(this.librariesUrl + '/' + id + '/Unlock', "");
+  }
+
   // Returns detailed error message or ok
   createLibrary(library: Library): Observable<any>{
     // Service should maintain the local copy for efficiency reasons
@@ -99,6 +110,8 @@ export class BooksService {
     // web error is returned
     return this.httpCli.post<string>(this.librariesUrl, library, {headers: this.headers})
   }
+
+
 
   /*
    * Book actions (get, create, etc)

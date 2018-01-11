@@ -9,6 +9,7 @@ var CheckInOut = require('./endpoints/CheckInOut')
 var LibraryCRUD = require('./endpoints/LibraryCRUD');
 var express = require('express')
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 // TODO: Remove for prod, 
 var DropCollections = require('./DataAccess/DropCollections')
@@ -31,11 +32,14 @@ app.use(session({
   store: new FileStore()
 }));
 
+app.use(cors({origin: '*'}))
+/*
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+*/
 
 //TODO: middleware to sanitize all inputs for XSS/security reasons
 
