@@ -74,6 +74,37 @@ GetAllLibraries = (callbackFunc) => {
     })
 }
 
+var ChangeLibraryLockStatus = (libraryId, shouldBeLocked, callbackFunc) => {
+    console.log("In DAL, changing lock for lib: " + libraryId);
+	MongoClient.connect(BASE_URI + DB_LOCATION, function(err, db) {
+		if(!err) {
+			console.log("We are connected");
+			
+			var AllLibrariesCollection = db.collection(ALL_LIBRARIES_COLLECTION);
+			AllLibrariesCollection.update({id: libraryId}, { $set: {isLocked: shouldBeLocked} }, (err, res) => {
+                if (err) throw err;
+                console.log("Update lock to " + shouldBeLocked + " attempted, res: " + res)
+			})
+
+			console.log("Sending good response")
+			callbackFunc({"Response":"Locked/Unlocked successfully"});
+		}else{
+			console.log("Error: " + err);
+			callbackFunc({"Response":"Error connecting to db"})
+		}
+	});
+}
+
+var UnlockLibrary = (libraryId, callbackFunc) => {
+    console.log("Unlocking library");
+    ChangeLibraryLockStatus(libraryId, false, callbackFunc);
+}
+
+var LockLibrary = (libraryId, callbackFunc) => {
+    console.log("Locking library");
+    ChangeLibraryLockStatus(libraryId, true, callbackFunc);
+}
+
 //                 // Get the list of all books in libraries to associate w/ libraries
 //                 var AllBooksCollection = db.collection(ALL_BOOKS_COLLECTION);
 //                 AllBooksCollection.find( { libraryId: { $in: allLibraries } } ).toArray((err, res) => {
@@ -105,5 +136,7 @@ GetAllLibraries = (callbackFunc) => {
 
 module.exports = {
     CreateLibrary: CreateLibrary,
-    GetAllLibraries: GetAllLibraries
+    GetAllLibraries: GetAllLibraries,
+    UnlockLibrary: UnlockLibrary,
+    LockLibrary: LockLibrary
 }

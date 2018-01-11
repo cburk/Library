@@ -20,9 +20,25 @@ var GetAllLibrariesEndpoint = (req, res) => {
     })
 }
 
+var UnlockLibrary = (req, res) => {
+    console.log("In unlock library request for lib: " + req.params.id)
+    LibraryCRUD_DAL.UnlockLibrary(req.params.id, (responseJSON) => {
+        res.send(responseJSON);
+    })
+}
+
+var LockLibrary = (req, res) => {
+    console.log("In lock library request for lib: " + req.params.id)
+    LibraryCRUD_DAL.LockLibrary(req.params.id, (responseJSON) => {
+        res.send(responseJSON);
+    })
+}
+
 module.exports = {
     CreateLibrary: CreateLibrary,
-    GetAllLibrariesEndpoint: GetAllLibrariesEndpoint
+    GetAllLibrariesEndpoint: GetAllLibrariesEndpoint,
+    UnlockLibrary: UnlockLibrary,
+    LockLibrary: LockLibrary
 }
 
 // curl -X PUT -H "Content-Type: application/json" -d '{"name": "Christians Library", "location": "600 W Chicago Ave"}'  -b mySessionStore.txt -c mySessionStore.txt localhost:8080/Libraries

@@ -105,6 +105,17 @@ app.post('/Libraries',
     LibraryCRUD.CreateLibrary
 )
 
+app.put('/Libraries/:id/Unlock',
+    // TODO: add login
+    LibraryCRUD.UnlockLibrary
+)
+
+app.put('/Libraries/:id/Lock',
+    // TODO: add login
+    LibraryCRUD.LockLibrary
+)
+
+
 app.listen(8080)
 console.log("Library backend listening on 8080")
 
@@ -116,3 +127,5 @@ curl -X GET localhost:8080/BookList
 
 curl -X PUT -H "Content-Type: application/json" localhost:8080/DropCollections
 */
+
+// curl -X PUT localhost:8080/Libraries/fa0c2bc424699149a97f1efd6d9b604b/Unlock

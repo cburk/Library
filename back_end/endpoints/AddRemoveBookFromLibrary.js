@@ -13,7 +13,9 @@ var AddToLibrary = (req, res) => {
 	//TODO: Flesh out book object more
 	var bookUID = md5(req.body.title + datetime.create().now())
 	//TODO: Maybe start out w/ requester having the book checked out
-	AddRemoveDAL.AddBookToLibrary(req, res, bookUID, req.body.libraryId, NO_BORROWER, req.body.title, req.body.author, req.username, true)
+	AddRemoveDAL.AddBookToLibrary(bookUID, req.body.libraryId, NO_BORROWER, req.body.title, req.body.author, req.username, true, (replyJSON) => {
+		res.send(replyJSON)
+	})
 }
 
 var RemoveBookFromLibrary = (req, res) => {
@@ -34,7 +36,9 @@ var RemoveBookFromLibrary = (req, res) => {
 			return
 			//TODO: Maybe make it so that no one else can take it?
 		}else{
-			AddRemoveDAL.RemoveBookFromLibrary(req, res, req.body.bookId)
+			AddRemoveDAL.RemoveBookFromLibrary(req.body.bookId, (responseJSON) => {
+				res.send(responseJSON)
+			})
 		}
 	})
 
