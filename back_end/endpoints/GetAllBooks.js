@@ -1,4 +1,4 @@
-var DataAccess = require('../DataAccess/GetAllBooks')
+var DataAccess = require('../DataAccess/BookCRUD')
 
 var GetAllBooksEndpoint = (req, res) => {
     console.log("DA: " + DataAccess)

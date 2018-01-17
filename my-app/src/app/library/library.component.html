@@ -3,10 +3,4 @@
 <p> 
   <a routerLink="/AddBook/{{library.id}}">Add a book</a>
 </p>
-<app-book [books]="library.contents"></app-book>
-
-<!--
-<div *ngIf="library.isBrowsing">
-  <app-book [books]="library.contents"></app-book>
-</div>
--->
+<app-books [books]="library.contents"></app-books>

@@ -1,17 +1,16 @@
-var GetDAL = require('../DataAccess/GetAllBooks')
-var UpdateDAL = require('../DataAccess/UpdateFields')
+var BookCRUD = require('../DataAccess/BookCRUD')
 var config = require("config")
 var NO_BORROWER = config.NO_BORROWER
 
 
 var CheckOutBook = (RelevantBook, bookId, Name, res) => {
 	if(RelevantBook.available){
-        UpdateDAL.ChangeAvailability(bookId, false)
-        UpdateDAL.ChangeBorrower(bookId, Name)
-		return res.sendStatus(200)
+        BookCRUD.ChangeAvailability(bookId, false)
+        BookCRUD.ChangeBorrower(bookId, Name)
+		res.send({"Response":"Successfully checked out book"})
     }
     else{
-        res.sendStatus(400)        
+        res.send({"Response":"Error: Book not available"})       
     }
 }
 
@@ -21,23 +20,24 @@ var CheckInBook = (RelevantBook, bookId, Name, res) => {
     console.log("B" + RelevantBook.borrower == Name)
     console.log("C" + RelevantBook.available == false)
 	if(RelevantBook != null && RelevantBook.borrower == Name && RelevantBook.available == false){
-        UpdateDAL.ChangeAvailability(bookId, true)
-        UpdateDAL.ChangeBorrower(bookId, NO_BORROWER)
-		res.sendStatus(200)
+        BookCRUD.ChangeAvailability(bookId, true)
+        BookCRUD.ChangeBorrower(bookId, NO_BORROWER)
+		res.send({"Response":"Successfully checked book back in"})
     }else{
-        res.sendStatus(400)
+        // TODO: Make better error messages
+        res.send({"Response":"Error"})
     }
 }
 
 module.exports = {
     CheckOut: (req, res) => {
-        GetDAL.GetBookById(req.body.BookId, (bookFound) => {
-            CheckOutBook(bookFound, req.body.BookId, req.username, res)
+        BookCRUD.GetBookById(req.body.BookId, (bookFound) => {
+            CheckOutBook(bookFound, req.body.BookId, req.Username, res)
         })
     },
     CheckIn: (req, res) => {
-        GetDAL.GetBookById(req.body.BookId, (bookFound) => {
-            CheckInBook(bookFound, req.body.BookId, req.username, res)
+        BookCRUD.GetBookById(req.body.BookId, (bookFound) => {
+            CheckInBook(bookFound, req.body.BookId, req.Username, res)
         })
     }
 }

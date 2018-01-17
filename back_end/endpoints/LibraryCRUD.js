@@ -1,7 +1,7 @@
 var md5 = require('md5')
 var datetime = require('node-datetime')
 var LibraryCRUD_DAL = require('../DataAccess/LibraryCRUD')
-var QueryDAL = require('../DataAccess/GetAllBooks')
+var QueryDAL = require('../DataAccess/BookCRUD')
 var config = require('config');
 var NO_BORROWER = config.NO_BORROWER
 

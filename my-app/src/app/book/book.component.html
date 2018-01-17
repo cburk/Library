@@ -1,15 +1,7 @@
 
-<div class="book-list">
-    <p>
-        This is a list of all the library's books:
-    </p>
-    <ul class="books">
-      <li *ngFor="let book of books">
-        <div class="book">
-            <h2 class="badge">{{book.title}}</h2>
-            <h3>Author: {{book.author}}</h3>
-            <img src="{{book.coverImg}}" />  
-        </div>
-      </li>
-    </ul>
+<div class="book">
+    <h2 class="title">{{book.title}} <button (click)="checkInOut()">{{checkText}}</button></h2>
+    <h3>Author: {{book.author}}</h3>
+    Error Message: {{error}}
+    <img src="{{book.coverImg}}" />  
 </div>

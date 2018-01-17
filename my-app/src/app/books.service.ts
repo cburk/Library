@@ -7,6 +7,9 @@ import 'rxjs/add/operator/filter';
 import { Library } from './library';
 import { Book } from './book';
 import { HttpResponse } from '@angular/common/http/src/response';
+import { UserService } from 'app/user.service';
+import { ResponseJSON } from 'app/responseJSON';
+import { forEach } from '@angular/router/src/utils/collection';
 
 // TODO: Maybe refactor into separate books and library services, w/
 // the latter using the former
@@ -18,7 +21,7 @@ export class BooksService {
   // Posts send json, need to set access allowed so CORS filters don't block reqs
   private headers: HttpHeaders = new HttpHeaders()
 
-  constructor(private httpCli: HttpClient) { }
+  constructor(private httpCli: HttpClient, private usersService: UserService) { }
 
   // Only retreived once on load, to smooth transitions
   // and b/c contents would only change infrequently
@@ -126,5 +129,55 @@ export class BooksService {
     return this.httpCli.post<string>(this.baseUrl + "/AddBookToLibrary", 
       book
     );
+  }
+
+  // Gets a book by id.  From local copy if initialized.
+  getBookById(bookId: string): Book{
+    this.initializeLibrariesIfUninitialized();
+
+    this.libraries.forEach(library => {
+      var matchingBook = library.contents.find(book => book.id == bookId)
+      if(matchingBook != undefined){
+        return matchingBook
+      }
+    })
+
+    // If none match, return empty
+    return Book.EmptyBook
+  }
+
+  checkoutBook(bookId: string): Observable<ResponseJSON>{
+    var userId = this.usersService.GetLoggedInUserId()
+    
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.put<ResponseJSON>(this.baseUrl + "/CheckOut", 
+        {BookId: bookId, Username: userId}
+      ).subscribe(res => {
+        // If it was a good response, note locally
+        if(this.validCheckoutResponse(res)){
+          this.getBookById(bookId).available = false
+        }
+        // Return the error or ok 
+        observer.next(res)
+        observer.complete()
+      });
+    })
+  }
+
+  /*
+  returnBook(bookId: string): Observable<ResponseJSON>{
+    var userId = this.usersService.GetLoggedInUserId()
+    
+    return this.httpCli.put<string>(this.baseUrl + "/CheckIn", 
+      {BookId: bookId, Username: userId}
+    );
+  }
+  */
+
+  /*
+  * Thought: validate responses in their own function
+  */
+  validCheckoutResponse(response: ResponseJSON): boolean{
+    return response.Response == "Error: Book not available";
   }
 }

@@ -1,7 +1,7 @@
 var md5 = require('md5')
 var datetime = require('node-datetime')
-var AddRemoveDAL = require('../DataAccess/AddRemoveBookFromLibrary')
-var QueryDAL = require('../DataAccess/GetAllBooks')
+var AddRemoveDAL = require('../DataAccess/BookCRUD')
+var QueryDAL = require('../DataAccess/BookCRUD')
 var config = require('config');
 var NO_BORROWER = config.NO_BORROWER
 
@@ -21,10 +21,12 @@ var AddToLibrary = (req, res) => {
 var RemoveBookFromLibrary = (req, res) => {
 	console.log("Trying to remove book: " + req.body.bookId)
 	QueryDAL.GetBookById(req.body.bookId, (foundBook) => {
+		// If the book doesn't exist, return not found
 		if(foundBook == null){
 			res.sendStatus(404)
 			return
 		}
+		// If the requesting user isn't the owner, return 403
 		if(foundBook.owner != req.username){
 				console.log("Error, requester" + req.username + " vs owner: " + foundBook.owner)
 				res.sendStatus(403)
