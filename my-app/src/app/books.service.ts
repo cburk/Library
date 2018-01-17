@@ -21,7 +21,7 @@ export class BooksService {
   // Posts send json, need to set access allowed so CORS filters don't block reqs
   private headers: HttpHeaders = new HttpHeaders()
 
-  constructor(private httpCli: HttpClient, private usersService: UserService) { }
+  constructor(private httpCli: HttpClient) { }
 
   // Only retreived once on load, to smooth transitions
   // and b/c contents would only change infrequently
@@ -136,7 +136,7 @@ export class BooksService {
     this.initializeLibrariesIfUninitialized();
 
     this.libraries.forEach(library => {
-      var matchingBook = library.contents.find(book => book.id == bookId)
+      var matchingBook = library.contents.find(book => book.bookId == bookId)
       if(matchingBook != undefined){
         return matchingBook
       }
@@ -146,16 +146,20 @@ export class BooksService {
     return Book.EmptyBook
   }
 
+  // TODO: Username will probably eventually be done via sessions/login server side
   checkoutBook(bookId: string): Observable<ResponseJSON>{
-    var userId = this.usersService.GetLoggedInUserId()
+    console.log("Book id not passed in? " + bookId)
     
     return new Observable<ResponseJSON>(observer => {
       this.httpCli.put<ResponseJSON>(this.baseUrl + "/CheckOut", 
-        {BookId: bookId, Username: userId}
+        {BookId: bookId} // Username set via session/login check on backend
       ).subscribe(res => {
         // If it was a good response, note locally
         if(this.validCheckoutResponse(res)){
+          console.log("Checkout successful")
           this.getBookById(bookId).available = false
+        }else{
+          console.log("Checkout unsuccessful")
         }
         // Return the error or ok 
         observer.next(res)
@@ -178,6 +182,11 @@ export class BooksService {
   * Thought: validate responses in their own function
   */
   validCheckoutResponse(response: ResponseJSON): boolean{
-    return response.Response == "Error: Book not available";
+    console.log("Response: " + response.Response)
+    return response.Response != "Error: Book not available";
+  }
+
+  validCheckinResponse(response: ResponseJSON): boolean{
+    return true;
   }
 }

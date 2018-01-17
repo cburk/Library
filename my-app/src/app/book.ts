@@ -1,5 +1,5 @@
 export class Book{
-    id: string;
+    bookId: string;
     title: string;
     author: string;
     coverImg: string;  
@@ -8,7 +8,7 @@ export class Book{
     available: boolean;
 
     constructor(    
-        id: string,
+        bookId: string,
         title: string,
         author: string,
         coverImg: string,
@@ -16,7 +16,7 @@ export class Book{
         owner: string,
         available: boolean,
      ){
-        this.id = id;
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.coverImg = coverImg;
