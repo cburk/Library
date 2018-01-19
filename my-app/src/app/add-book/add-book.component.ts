@@ -61,8 +61,10 @@ export class AddBookComponent implements OnInit {
 
     if(this.error.length == 0){
       this.bookService.createBook(this.book).subscribe(res => {
-        console.log("Create book req sent, res: " + res)
-        this.error = res.Response;
+        console.log("Create book req sent, res: " + res.Response)
+        if(this.bookService.validBookCreateResponse(res)){
+          this.error = res.Response;
+        }
       });
     }
   }

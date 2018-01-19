@@ -17,9 +17,12 @@ Represents the page/detailed view for a specific library
 export class LibraryComponent implements OnInit {
   library: Library = Library.InvalidLibrary; // TODO: Make this a placeholder library maybe? Don't display if it's null?
   libId: string;
+  error: string = "";
 
   initLibrary()
   {
+    this.error = ""
+
     // Get this lib's name/id
     // use + to convert to int
     this.libId = this.route.snapshot.params['name'];
@@ -55,15 +58,14 @@ export class LibraryComponent implements OnInit {
       requestObservable = this.bs.lockLibrary(this.library.id);
     }
 
-    requestObservable.subscribe((res) => {
-      console.log(res)
-      console.log(res.Response)
-  
+    requestObservable.subscribe((res) => {  
       // Request is valid, update local copies
-      if(res.Response == "Locked/Unlocked successfully"){
-        console.log("REST service responded w/ ok, was locked: " + this.library.isLocked)
-        this.library.isLocked = !this.library.isLocked;
-        console.log("Now locked: " + this.library.isLocked)
+      if(this.bs.validLockUnlockResponse(res)){
+        console.log("Success!  library locked now: " + this.library.isLocked)
+      }else{
+        // error message
+        console.log("Error response from server: " + res.Response)
+        this.error = res.Response
       }
     })  
   }

@@ -98,11 +98,44 @@ export class BooksService {
   // Library component should poll every 10 seconds or something like that
 
   // Locking/unlocking should return {"Response":"Locked/Unlocked successfully"}
-  lockLibrary(id: string): Observable<string>{
-    return this.httpCli.put<string>(this.librariesUrl + '/' + id + '/Lock', "");
+  lockLibrary(id: string): Observable<ResponseJSON>{
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.put<ResponseJSON>(this.librariesUrl + '/' + id + '/Lock', "").subscribe(res => {
+
+        if(this.validLockUnlockResponse(res)){
+          // If the response is good, register the local copy as locked
+          console.log("Now locked") 
+          this.getLibraryById(id).subscribe(library => {
+            library.isLocked = !library.isLocked;
+          })
+        }else{
+          console.log("Lock failed!")
+        }
+
+        observer.next(res)
+        observer.complete()
+      })
+    })
   }
-  unlockLibrary(id: string): Observable<string>{
-    return this.httpCli.put<string>(this.librariesUrl + '/' + id + '/Unlock', "");
+
+  unlockLibrary(id: string): Observable<ResponseJSON>{
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.put<ResponseJSON>(this.librariesUrl + '/' + id + '/Unlock', "").subscribe(res => {
+
+        if(this.validLockUnlockResponse(res)){
+          // If the response is good, register the local copy as unlocked
+          console.log("Now unlocked" + res) 
+          this.getLibraryById(id).subscribe(library => {
+            library.isLocked = !library.isLocked;
+          })
+        }else{
+          console.log("Unlock failed!")
+        }
+
+        observer.next(res)
+        observer.complete()
+      })
+    }) 
   }
 
   // Returns detailed error message or ok
@@ -124,21 +157,29 @@ export class BooksService {
     })
   }
 
-
-
   /*
    * Book actions (get, create, etc)
    */
-  // Returns detailed error message or ok
+  // Creates a book and adds it to the library specified by book.LibraryId
   createBook(book: Book): Observable<any>{
-    // Service should maintain the local copy for efficiency reasons
-    this.getLibraryById(book.libraryId).subscribe(lib => {
-      lib.contents.push(book)
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.post<ResponseJSON>(this.baseUrl + "/AddBookToLibrary", 
+        book
+      ).subscribe(res => {
+        if(this.validBookCreateResponse(res)){
+          console.log("Created successfully")
+          // Service should maintain the local copy for efficiency reasons
+          this.getLibraryById(book.libraryId).subscribe(lib => {
+            lib.contents.push(book)
+          })
+        }else{
+          console.log("library not created")
+        }
+        
+        observer.next(res)
+        observer.complete()
+      });
     })
-
-    return this.httpCli.post<string>(this.baseUrl + "/AddBookToLibrary", 
-      book
-    );
   }
 
   // Gets a book by id.  From local copy if initialized.
@@ -204,11 +245,19 @@ export class BooksService {
     return response.Response != "Error: Book not available";
   }
   validCheckinResponse(response: ResponseJSON): boolean{
-    console.log("Response from server: " + response.Response)
+    console.log("Response from servera: " + response.Response)
     if(response.Response == "Successfully checked out book" || response.Response == "Error: Book not available"){
       return false
     }
     return true
+  }
+
+  validBookCreateResponse(response: ResponseJSON): boolean{
+    console.log("Response from server: " + response.Response)
+    if(response.Response == "Added successfully"){
+      return true
+    }
+    return false
   }
 
   validLibCreateResponse(response: ResponseJSON): boolean{
@@ -218,6 +267,15 @@ export class BooksService {
     }
     return true
   }
+
+  validLockUnlockResponse(response: ResponseJSON): boolean{
+    console.log("Response from server: " + response.Response)
+    if(response.Response != "Locked/Unlocked successfully"){
+      return false
+    }
+    return true
+  }
+
 
   validXResponse(response: ResponseJSON): boolean{
     console.log("Response from server: " + response.Response)
