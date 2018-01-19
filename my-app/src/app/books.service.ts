@@ -148,8 +148,7 @@ export class BooksService {
 
   // TODO: Username will probably eventually be done via sessions/login server side
   checkoutBook(bookId: string): Observable<ResponseJSON>{
-    console.log("Book id not passed in? " + bookId)
-    
+    console.log("In checkout service call")
     return new Observable<ResponseJSON>(observer => {
       this.httpCli.put<ResponseJSON>(this.baseUrl + "/CheckOut", 
         {BookId: bookId} // Username set via session/login check on backend
@@ -168,25 +167,45 @@ export class BooksService {
     })
   }
 
-  /*
   returnBook(bookId: string): Observable<ResponseJSON>{
-    var userId = this.usersService.GetLoggedInUserId()
-    
-    return this.httpCli.put<string>(this.baseUrl + "/CheckIn", 
-      {BookId: bookId, Username: userId}
-    );
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.put<ResponseJSON>(this.baseUrl + "/CheckIn", 
+        {BookId: bookId} // Username set via session/login check on backend
+      ).subscribe(res => {
+        // If it was a good response, note locally
+        if(this.validCheckinResponse(res)){
+          console.log("Return successful")
+          this.getBookById(bookId).available = true
+        }else{
+          console.log("Return unsuccessful")
+        }
+        // Return the error or ok 
+        observer.next(res)
+        observer.complete()
+      });
+    })
   }
-  */
 
   /*
-  * Thought: validate responses in their own function
+  * Response Validators
   */
   validCheckoutResponse(response: ResponseJSON): boolean{
     console.log("Response: " + response.Response)
     return response.Response != "Error: Book not available";
   }
-
   validCheckinResponse(response: ResponseJSON): boolean{
-    return true;
+    console.log("Response from server: " + response.Response)
+    if(response.Response == "Successfully checked out book" || response.Response == "Error: Book not available"){
+      return false
+    }
+    return true
+  }
+
+  validXResponse(response: ResponseJSON): boolean{
+    console.log("Response from server: " + response.Response)
+    if(response.Response == "Successfully checked out book" || response.Response == "Error: Book not available"){
+      return false
+    }
+    return true
   }
 }

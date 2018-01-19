@@ -29,14 +29,30 @@ export class BookComponent {
     if(this.book.available){
       console.log("In handler, attempting check out")
       this.checkOut()
+    }else{
+      // TODO: needs to be checked out and be chcecked out by us to us to return.  When that field is added...
+      console.log("Click handler, returning")
+      this.checkIn()
     }
+  }
+
+  // Attempts to return this book to the library.
+  checkIn(){
+    this.bookService.returnBook(this.book.bookId).subscribe(resJSON => {
+      // If this was an error (either one), print the message
+      if(!this.bookService.validCheckinResponse(resJSON)){
+        this.error = resJSON.Response
+      // Otherwise, update the book's state
+      }else{
+        console.log("Component flipping availability")
+        this.book.available = !this.book.available
+        this.checkText = this.getButtonText();
+      }
+    })
   }
 
   // Makes a web request to check the book in or out, depending on its current status
   checkOut(){
-    console.log("The id isn't here? " + this.book)
-    console.log(this.book)
-
     this.bookService.checkoutBook(this.book.bookId).subscribe(resJSON => {
       // If this was an error (either one), print the message
       if(!this.bookService.validCheckoutResponse(resJSON)){
