@@ -9,8 +9,9 @@ var CreateLibrary = (req, res) => {
 	console.log("Creating library called: " + req.body.name);
 
     var id = md5(req.body.name + datetime.create().now())
-	LibraryCRUD_DAL.CreateLibrary(id, req.body.name, req.body.location)
-	res.sendStatus(200)
+	LibraryCRUD_DAL.CreateLibrary(id, req.body.name, req.body.location, (responseJSON) => {
+        res.send(responseJSON);
+    })
 }
 
 var GetAllLibrariesEndpoint = (req, res) => {

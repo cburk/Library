@@ -1,0 +1,13 @@
+<form (ngSubmit)="createLibrary()">
+  <label>
+    Name: <input id="name" type="text" [(ngModel)]="libraryName" name="name"/>
+  </label><br />
+  <label>
+    Location: <input id="author" type="text" [(ngModel)]="libraryLocation" name="author"/>
+  </label><br />
+  
+  <div ng-if='error==null || error.length > 0'>
+      <label>Error and/or Response Message: {{error}}</label><br />
+  </div>
+  <button type="submit">Create Library</button>    
+</form>

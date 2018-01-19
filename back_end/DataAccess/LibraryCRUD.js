@@ -16,7 +16,7 @@ var DB_LOCATION = cfgManager.DB_LOCATION
 // hit for a small number of libraries/users would outweigh the dev
 // costs of not doing so.
 
-var CreateLibrary = (id, name, location) => {
+var CreateLibrary = (id, name, location, callbackFunc) => {
 	var libraryObj = {id, name, location, isLocked: true, contents: []}
 	console.log("In DAL, adding book: " + libraryObj);
 	MongoClient.connect(BASE_URI + DB_LOCATION, function(err, db) {
@@ -24,8 +24,13 @@ var CreateLibrary = (id, name, location) => {
 			console.log("We are connected");
 			
 			var AllLibrariesCollection = db.collection(ALL_LIBRARIES_COLLECTION);
-			AllLibrariesCollection.insert(libraryObj)
-		}
+            AllLibrariesCollection.insert(libraryObj)
+            
+            // Needs to return the library id so that the frontend knows how to refer to it
+            callbackFunc({"Response":id});
+		}else{
+            callbackFunc({"Response":"Error connecting to db"});
+        }
 	});
 }
 

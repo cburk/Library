@@ -5,8 +5,8 @@
     <label>
       Work title: <input id="title" type="text" [(ngModel)]="book.title" name="title"/>
     </label><br />
-    <label for="author">
-      Author: <input id="author" type="text" [(ngModel)]="book.author" name="title"/>
+    <label>
+      Author: <input id="author" type="text" [(ngModel)]="book.author" name="author"/>
     </label><br />
     
     <div ng-if='error==null || .length > 0'>

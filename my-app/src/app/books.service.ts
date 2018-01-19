@@ -10,6 +10,7 @@ import { HttpResponse } from '@angular/common/http/src/response';
 import { UserService } from 'app/user.service';
 import { ResponseJSON } from 'app/responseJSON';
 import { forEach } from '@angular/router/src/utils/collection';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 // TODO: Maybe refactor into separate books and library services, w/
 // the latter using the former
@@ -105,13 +106,22 @@ export class BooksService {
   }
 
   // Returns detailed error message or ok
-  createLibrary(library: Library): Observable<any>{
-    // Service should maintain the local copy for efficiency reasons
-    this.libraries.push(library)
-
-    // TODO maybe? Pull validation out into here, and then either an error is returned locally or the 
-    // web error is returned
-    return this.httpCli.post<string>(this.librariesUrl, library, {headers: this.headers})
+  createLibrary(library: Library): Observable<ResponseJSON>{
+    return new Observable<ResponseJSON>(observer => {
+      this.httpCli.post<ResponseJSON>(this.librariesUrl, library, {headers: this.headers}).subscribe(res => {
+        if(this.validLibCreateResponse(res)){
+          console.log("Created successfully")
+          // Service should maintain the local copy for efficiency reasons
+          library.id = res.Response
+          this.libraries.push(library)
+        }else{
+          console.log("library not created")
+        }
+        
+        observer.next(res)
+        observer.complete()
+      })
+    })
   }
 
 
@@ -196,6 +206,14 @@ export class BooksService {
   validCheckinResponse(response: ResponseJSON): boolean{
     console.log("Response from server: " + response.Response)
     if(response.Response == "Successfully checked out book" || response.Response == "Error: Book not available"){
+      return false
+    }
+    return true
+  }
+
+  validLibCreateResponse(response: ResponseJSON): boolean{
+    console.log("Response from server: " + response.Response)
+    if(response.Response == "Error connecting to db"){
       return false
     }
     return true

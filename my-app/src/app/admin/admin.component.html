@@ -1,8 +1,10 @@
 <div>
+  <h2><b>Administrative Tools</b></h2>
   <h3>Add a book to library:</h3>
   <div *ngFor="let library of libraries">
     <a routerLink="/AddBook/{{library.id}}">
       <span>{{library.name}}, located at: {{library.location}}</span>
     </a>
   </div>  
+  <app-add-library></app-add-library>
 </div>
