@@ -14,6 +14,7 @@ import { LibraryComponent } from './library/library.component';
 import { AdminComponent } from './admin/admin.component'
 import { AddBookComponent } from './add-book/add-book.component'
 import { AddLibraryComponent } from './add-library/add-library.component'
+import { LoadingIconComponent } from './loading-icon/loading-icon.component'
 
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     BookComponent,
     LibrariesComponent,
     LibraryComponent,
+    LoadingIconComponent,
     // To add/remove libs and items from them
     AdminComponent,
     AddBookComponent,
