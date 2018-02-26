@@ -8,11 +8,14 @@ import * as anime from 'animejs';
 })
 export class LoadingIconComponent implements OnInit {
 
+  isLoggedIn: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
     console.log("Anime: ")
     console.log(anime)
+    /*
     anime({
       targets: 'div',
       translateX: [
@@ -24,6 +27,7 @@ export class LoadingIconComponent implements OnInit {
       duration: 2000,
       loop: true
     });
+    */
   }
 
 }

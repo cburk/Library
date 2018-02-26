@@ -1,6 +1,6 @@
 <h1>
   {{title}}
-  <div class="navbar">
+  <div *ngIf="isLoggedIn" class="navbar">
     <a routerLink="/">Home</a>
     <a routerLink="/Admin">Admin</a>
   </div>

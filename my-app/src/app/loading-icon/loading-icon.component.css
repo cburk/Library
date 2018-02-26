@@ -1,0 +1,8 @@
+:host {
+    display: flex;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+svg { position:relative; top:0; left:0; height:100%; width:30% }
+

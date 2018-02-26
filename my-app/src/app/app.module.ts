@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { BooksService } from './books.service';
 import { UserService } from './user.service';
 
@@ -15,6 +16,7 @@ import { AdminComponent } from './admin/admin.component'
 import { AddBookComponent } from './add-book/add-book.component'
 import { AddLibraryComponent } from './add-library/add-library.component'
 import { LoadingIconComponent } from './loading-icon/loading-icon.component'
+import { LoginComponent } from './login/login.component'
 
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
@@ -27,6 +29,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     LibrariesComponent,
     LibraryComponent,
     LoadingIconComponent,
+    LoginComponent,
     // To add/remove libs and items from them
     AdminComponent,
     AddBookComponent,

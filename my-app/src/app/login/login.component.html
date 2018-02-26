@@ -1,0 +1,24 @@
+<div>
+  <div class="side-divider">
+    <div class="input-box">
+      <h2>Login</h2>
+      <form (ngSubmit)="attemptLogin()">
+        <label>
+          Username: <input id="username" type="text" [(ngModel)]="username" name="username"/>
+        </label><br />
+        <label>
+          Password: <input id="password" type="text" [(ngModel)]="password" name="password"/>
+        </label><br />
+        
+        <div ng-if='error==null || .length > 0'>
+            <label>Error and/or Response Message: {{error}}</label><br />
+        </div>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+    <div class="animation-box">
+      <!--<h2>Hello world</h2>-->
+      <app-loading-icon></app-loading-icon>
+    </div>
+  </div> 
+</div>
