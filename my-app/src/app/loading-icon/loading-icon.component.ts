@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 import * as anime from 'animejs';
 
 @Component({

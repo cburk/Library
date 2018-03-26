@@ -18,6 +18,8 @@ import { AddLibraryComponent } from './add-library/add-library.component'
 import { LoadingIconComponent } from './loading-icon/loading-icon.component'
 import { LoginComponent } from './login/login.component'
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
 @NgModule({
@@ -41,7 +43,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     HttpModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularSvgIconModule
   ],
   // Providers are used for dependency injection.  Services go here
   providers: [BooksService, UserService],
