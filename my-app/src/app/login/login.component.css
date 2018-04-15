@@ -6,15 +6,19 @@
 
 .side-divider {
     height: 100%;
-    width: 100%;
+    width: 90%;
+    margin-left: 10%;
+
     display: grid;
-    grid-template-columns: repeat(2, 50vw);
+    grid-template-columns: repeat(2, 40vw);
+    align-content: center;
 }
 
 .input-box {
     border-style: solid;
 
-    width: 100%;
+    align-content: center;
+
     text-align: center;
 
     background-color: rgb(248, 240, 240);
@@ -23,6 +27,6 @@
 
 .animation-box {
     border-style: solid;
-    width: 100%;
+    align-content: center;
     /*background-color: rgb(21, 20, 21)*/
 }
