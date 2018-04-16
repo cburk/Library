@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
+   <!-- viewBox="0 0 100% 100%" -->
+<!-- ^ Goes in svg defn below > -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -11,7 +12,6 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="100%"
    height="100%"
-   viewBox="-175 50 600 500"
    version="1.1"
    id="svg840"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -71,23 +71,24 @@
   <path
      style="fill:#cdcdcd;fill-opacity:1;stroke:#000023;stroke-width:1.9372071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="M 106.09583,0.52903292 A 40.985353,32.049285 0 0 0 65.497591,29.49235 h -0.01803 v 0.117875 a 40.985353,32.049285 0 0 0 -0.212293,2.539912 h 0.212288 V 139.25814 h -0.233681 v 46.7394 h 7.639112 v -46.7394 H 72.72865 V 32.150137 h 0.148104 a 33.098715,22.111738 0 0 1 32.945896,-21.350223 33.098715,22.111738 0 0 1 33.14508,21.350223 h 0.25836 V 141.8545 h 7.80697 V 32.150137 h 0.16128 a 40.985353,32.049285 0 0 0 -0.16128,-1.982127 v -1.673357 h -0.19584 A 40.985353,32.049285 0 0 0 106.09583,0.52903292 Z"
-     id="path5454"
+     id="LockBolt"
      inkscape:connector-curvature="0"
-     inkscape:label="LockBolt" />
+     inkscape:label="LockBolt" 
+  />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <ellipse
        style="fill:#808080;fill-opacity:1;stroke:#232323;stroke-width:3.32653999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path5085"
+       id="LockBase"
        cx="106.75415"
        cy="209.47586"
        rx="82.647255"
        ry="83.716438"
        inkscape:label="LockBase" />
     <g
-       id="g5577"
+       id="LockWheel"
        inkscape:label="LockWheel"
        transform="matrix(3.1845311,0,0,3.2124405,21.971739,-64.690319)">
       <ellipse

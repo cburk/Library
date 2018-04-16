@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import * as anime from 'animejs';
 
@@ -14,11 +14,19 @@ export class LoadingIconComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("Anime: ")
-    console.log(anime)
+    console.log("ng on init")
+  }
+
+  ngAfterViewInit() {
+    console.log("ng after view init")
+    
+    var svgIcon = document.getElementById("fullLockSVG") as HTMLObjectElement;
+    console.log("fullLockSVG")
+    console.log(svgIcon);
+
     /*
     anime({
-      targets: 'div',
+      targets: LockBase,
       translateX: [
         { value: 100, duration: 1200 },
         { value: 0, duration: 800 }
@@ -31,4 +39,26 @@ export class LoadingIconComponent implements OnInit {
     */
   }
 
+  public startAnimation(): void {
+    console.log("Trying to animate");
+    var svgDoc = (document.getElementById("fullLockSVG") as HTMLObjectElement).getSVGDocument()
+    console.log("Svg doc")
+    console.log(svgDoc)
+    var lockWheel = svgDoc.getElementById("LockWheel")
+    console.log("lockWheel");
+    console.log(lockWheel)
+
+    anime({
+      targets: lockWheel,
+      translateX: [
+        { value: 100, duration: 1200 },
+        { value: 0, duration: 800 }
+      ],
+      rotate: '1turn',
+      backgroundColor: '#FFF',
+      duration: 2000,
+      loop: true
+    });
+
+  }
 }

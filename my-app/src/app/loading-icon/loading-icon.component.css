@@ -5,8 +5,7 @@
 }
 
 /* svg-icon { width: 50vw; height: 50vh; margin: auto; padding-top: 25vh; padding-bottom: 25vh; padding-left: 25%; padding-right: 25%} */
-svg-icon { display: flex; margin: auto; position: relative; height: 100%; padding-left: 25%; padding-right: 25%}
+object { display: flex; margin: auto; position: relative; height: 90%; padding-left: 25%; padding-right: 25%; padding-top: 10%}
 
-svg { margin: auto; padding-left: 10% }
 
 .outer-rectangle { position:relative; top:0; left:0; height:100%; width:100% }
