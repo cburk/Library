@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <!-- Note to self: this is the trick to make something wider, I think -->
+    <!-- If you start the viewbox at x=0 w/ a vB width of 1000, it's still arbitrarily small (still scales b/c of 100% svg width-->
+    <!--BUT start the coordinate system at 500, give it 500 width.  Now
+    start an object at 0 and give it 2000 width.  You should now have an object
+    2x larger than it was before, b/c you're 2x the size of your viewBox!
+
+    Maybe not?
+    -->
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    width="100%"
+    height="100%"
+    viewBox="-50 -50 100 100"
+    version="1.1"
+    id="svg840"
+    >
+        <!-- viewBox="500 0 500 3000" -->
+    <!-- <rect x="0" y="800" width="2000" height="1400" fill="red"/> -->
+    <g id="LockBase">
+        <circle cx="0" cy="0" r="45" stroke="black" stroke-width="5" fill="grey"/>
+        <g id="LockWheel">
+            <circle id="LockInterior" cx="0" cy="0" r="30" fill="black" />
+            <rect x="-2" y="20" height="10" width="4" fill="white"/>
+            <!-- Could just create a lot of rects and rotate at start -->
+        </g>
+    </g>
+</svg>
